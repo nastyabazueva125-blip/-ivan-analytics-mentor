@@ -1,0 +1,8 @@
+Current state of the illustration in section 3:
+- The illustration is visible at the bottom right of the section
+- It shows the line-art analyst figure in a warm orange/white tint
+- It's positioned absolute, overlapping with bullet points 04 and 05
+- The scan beam and glow effects are visible
+- Text has highlighted keywords: "работаете с данными", "помогаете бизнесу принимать решения" in white, "умение анализировать", "делать выводы" in red
+- The illustration is partially overlapping the right column content - need to check if this is intentional or needs adjustment
+- Overall the maximalist look is working well - the illustration is large and dramatic

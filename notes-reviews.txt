@@ -1,0 +1,14 @@
+Reviews section observations:
+- Light background (#f5f5f3) - looks correct
+- "ОТЗЫВЫ" red label with line - correct
+- "ЧТО ГОВОРЯТ УЧЕНИКИ" heading in dark text - correct
+- "Отзывы верифицированы" badge with heart icon visible (SVG shows as heart, should be shield - need to check)
+- "Смотреть все отзывы" link with arrow - correct
+- Cards are white on light background with rounded corners - looks good
+- Tags (С нуля, 180 дней, etc.) in red pill badges - correct
+- Bold text highlights working
+- Bottom section with price/offer amount - correct
+- Grid layout: first card normal, second card spans 2 columns (wide), bottom row has 3 cards
+- All 5 reviews visible with correct text
+- Responsive rules added for 900px and 600px
+- Overall section looks clean and professional on light background

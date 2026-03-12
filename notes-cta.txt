@@ -1,0 +1,6 @@
+CTA section observation:
+- The word ANALYTICS with gradient fill is now invisible on the white background
+- The gradient is red-to-orange but since it's italic + gradient on white bg, it seems to have disappeared
+- Need to check: the text-fill-color transparent with background-clip might not be rendering
+- Actually looking at the screenshot: "ГОТОВЫ ВОЙТИ В DATA" is visible, but "ANALYTICS?" appears to be missing/invisible
+- The gradient text on white background might be too light or the gradient colors need to be darker
