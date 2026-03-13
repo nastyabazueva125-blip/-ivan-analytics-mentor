@@ -2033,12 +2033,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
-    .footer-bottom__ip {
+    .footer-bottom__row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-bottom__item {
       font-family: 'Inter', sans-serif;
       font-size: 0.6875rem;
       color: rgba(255,255,255,0.25);
       line-height: 1.6;
+    }
+    .footer-bottom__item a {
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-bottom__item a:hover {
+      color: var(--red);
+    }
+    .footer-bottom__sep {
+      width: 1px;
+      height: 10px;
+      background: rgba(255,255,255,0.12);
     }
     .footer-bottom__copy {
       font-family: 'Inter', sans-serif;
@@ -2048,52 +2069,24 @@
     .footer-legal {
       grid-column: 1 / -1;
       display: flex;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 0.25rem;
     }
     .footer-legal__link {
       font-family: 'Inter', sans-serif;
       font-size: 0.6875rem;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.3);
       text-decoration: none;
       transition: color 0.3s ease;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 1px;
     }
     .footer-legal__link:hover {
       color: var(--red);
-      border-bottom-color: var(--red);
     }
-    .footer-details {
-      grid-column: 1 / -1;
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-details__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.5rem 2rem;
-    }
-    .footer-details__item {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6875rem;
-      color: rgba(255,255,255,0.25);
-      line-height: 1.6;
-    }
-    .footer-details__label {
-      color: rgba(255,255,255,0.4);
-    }
-    .footer-details__value {
-      color: rgba(255,255,255,0.25);
-    }
-    .footer-details__value a {
-      color: rgba(255,255,255,0.35);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .footer-details__value a:hover {
-      color: var(--red);
+    .footer-legal__sep {
+      width: 1px;
+      height: 10px;
+      background: rgba(255,255,255,0.1);
     }
 
     /* ═══════════════════════════════════════════════════════════
@@ -2608,9 +2601,9 @@
       .cta-final__heading { font-size: clamp(2.5rem, 1.5rem + 4vw, 5rem); }
       .footer-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 2rem; }
       .footer-contacts { align-items: center; }
-      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .footer-legal { flex-direction: column; align-items: center; gap: 0.75rem; }
-      .footer-details__grid { grid-template-columns: 1fr; text-align: center; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; align-items: center; }
+      .footer-bottom__row { justify-content: center; gap: 0.75rem; }
+      .footer-legal { flex-wrap: wrap; justify-content: center; }
     }
 
     @media (max-width: 600px) {
@@ -3638,38 +3631,28 @@
         <div class="footer-divider"></div>
 
         <div class="footer-bottom">
-          <div class="footer-bottom__ip">ИП Полукаров Иван Сергеевич</div>
+          <div class="footer-bottom__row">
+            <span class="footer-bottom__item">ИП Полукаров Иван Сергеевич</span>
+            <span class="footer-bottom__sep"></span>
+            <span class="footer-bottom__item">ИНН 773719152033</span>
+            <span class="footer-bottom__sep"></span>
+            <span class="footer-bottom__item">ОГРНИП 325774600871039</span>
+          </div>
           <div class="footer-bottom__copy">&copy; 2026</div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-bottom__row">
+            <span class="footer-bottom__item"><a href="mailto:analystdementor.assistant1@yandex.ru">analystdementor.assistant1@yandex.ru</a></span>
+            <span class="footer-bottom__sep"></span>
+            <span class="footer-bottom__item"><a href="https://t.me/AnalystDeMent0r" target="_blank">Telegram: @AnalystDeMent0r</a></span>
+          </div>
         </div>
 
         <div class="footer-legal">
           <a href="#" class="footer-legal__link" id="oferta-link">Оферта</a>
+          <span class="footer-legal__sep"></span>
           <a href="#" class="footer-legal__link" id="privacy-link">Политика конфиденциальности</a>
-        </div>
-
-        <div class="footer-details">
-          <div class="footer-details__grid">
-            <div class="footer-details__item">
-              <span class="footer-details__label">ИП:</span>
-              <span class="footer-details__value"> Полукаров Иван Сергеевич</span>
-            </div>
-            <div class="footer-details__item">
-              <span class="footer-details__label">ИНН:</span>
-              <span class="footer-details__value"> 773719152033</span>
-            </div>
-            <div class="footer-details__item">
-              <span class="footer-details__label">ОГРНИП:</span>
-              <span class="footer-details__value"> 325774600871039</span>
-            </div>
-            <div class="footer-details__item">
-              <span class="footer-details__label">E-mail:</span>
-              <span class="footer-details__value"> <a href="mailto:analystdementor.assistant1@yandex.ru">analystdementor.assistant1@yandex.ru</a></span>
-            </div>
-            <div class="footer-details__item">
-              <span class="footer-details__label">Telegram:</span>
-              <span class="footer-details__value"> <a href="https://t.me/AnalystDeMent0r" target="_blank">@AnalystDeMent0r</a></span>
-            </div>
-          </div>
         </div>
 
       </div>
