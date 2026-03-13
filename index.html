@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Иван — Менторство по Data Analytics</title>
+  <title>Полукаров Иван — Менторство по Аналитике Данных</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
@@ -201,7 +201,7 @@
 
     .banner-headline {
       font-family: var(--ff-heading);
-      font-size: clamp(2.75rem, -0.5rem + 7vw, 7.5rem);
+      font-size: clamp(2.5rem, -0.5rem + 5.8vw, 5.5rem);
       font-weight: 400;
       line-height: 0.92;
       text-transform: uppercase;
@@ -1269,8 +1269,8 @@
 
     .mentor__card {
       position: relative;
-      background: #111;
-      border: 1px solid rgba(var(--rgb-white), 0.06);
+      background: #1a1a1a;
+      border: 1px solid rgba(var(--rgb-white), 0.12);
       border-radius: 1rem;
       padding: 2rem 1.5rem;
       min-height: 320px;
@@ -1300,13 +1300,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      transform: scale(0.85);
+      opacity: 0.85;
+      transform: scale(0.95);
       transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
     }
     .mentor__card:hover .mentor__card-illust {
       opacity: 1;
       transform: scale(1);
+    }
+    .mentor__card:hover .mentor__card-illust svg {
+      animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes iconBounce {
+      0% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(1.25) rotate(-8deg); }
+      50% { transform: scale(0.9) rotate(4deg); }
+      70% { transform: scale(1.1) rotate(-2deg); }
+      100% { transform: scale(1) rotate(0deg); }
     }
 
     .mentor__card-illust svg {
@@ -2199,6 +2209,303 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
+       SECTION: KANBAN
+       ═══════════════════════════════════════════════════════════ */
+    .kanban {
+      position: relative;
+      padding: clamp(5rem, 3rem + 6vw, 9rem) 0;
+      background: #020202;
+      overflow: hidden;
+    }
+    .kanban::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(232,52,46,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .kanban__header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .kanban__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      margin-bottom: 1.25rem;
+    }
+    .kanban__label::before,
+    .kanban__label::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--clr-accent);
+    }
+    .kanban__heading {
+      font-family: var(--ff-heading);
+      font-size: clamp(1.8rem, 1rem + 2.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--clr-white);
+      margin-bottom: 1.25rem;
+    }
+    .kanban__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(0.875rem, 0.75rem + 0.3vw, 1.0625rem);
+      color: var(--clr-text);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Glassmorphism board wrapper */
+    .kanban__board-wrap {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 1.25rem;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 50%, rgba(232,52,46,0.15) 100%);
+      animation: kanbanBorderGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes kanbanBorderGlow {
+      0% { background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 50%, rgba(232,52,46,0.15) 100%); }
+      100% { background: linear-gradient(135deg, rgba(232,52,46,0.2) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.12) 100%); }
+    }
+    .kanban__board {
+      position: relative;
+      border-radius: 1.2rem;
+      backdrop-filter: blur(2rem); -webkit-backdrop-filter: blur(2rem);
+      background: linear-gradient(145deg, rgba(20,20,22,0.85) 0%, rgba(10,10,12,0.95) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+      overflow: hidden;
+      box-shadow:
+        0 0 60px rgba(0,0,0,0.5),
+        0 0 30px rgba(232,52,46,0.03) inset;
+    }
+    .kanban__board::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(232,52,46,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Board top bar */
+    .kanban__topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .kanban__topbar-title {
+      font-family: var(--ff-heading);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--clr-white);
+    }
+    .kanban__topbar-views {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .kanban__view-btn {
+      padding: 0.35rem 0.75rem;
+      border-radius: 0.375rem;
+      font-family: var(--ff-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s ease;
+    }
+    .kanban__view-btn--active {
+      color: var(--clr-white);
+      background: rgba(232,52,46,0.15);
+      border-color: rgba(232,52,46,0.3);
+    }
+
+    /* Columns */
+    .kanban__columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .kanban__col {
+      background: rgba(255,255,255,0.02);
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 0.875rem;
+      min-height: 280px;
+    }
+    .kanban__col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.875rem;
+      padding-bottom: 0.625rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .kanban__col-title {
+      font-family: var(--ff-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+    .kanban__col-count {
+      font-family: var(--ff-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.05);
+      padding: 0.15rem 0.5rem;
+      border-radius: 1rem;
+    }
+
+    /* Cards */
+    .kanban__card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 0.625rem;
+      padding: 0.875rem;
+      margin-bottom: 0.625rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .kanban__card.card-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .kanban__card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(232,52,46,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 15px rgba(232,52,46,0.05);
+      transform: translateY(-2px);
+    }
+    .kanban__card-title {
+      font-family: var(--ff-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .kanban__card-tag {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.3rem;
+      font-family: var(--ff-body);
+      font-size: 0.625rem;
+      font-weight: 600;
+      margin-right: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+    .kanban__card-tag--green {
+      background: rgba(72,199,142,0.15);
+      color: #48c78e;
+    }
+    .kanban__card-tag--blue {
+      background: rgba(66,153,225,0.15);
+      color: #4299e1;
+    }
+    .kanban__card-tag--pink {
+      background: rgba(237,100,166,0.15);
+      color: #ed64a6;
+    }
+    .kanban__card-tag--yellow {
+      background: rgba(236,201,75,0.15);
+      color: #ecc94b;
+    }
+    .kanban__card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.625rem;
+    }
+    .kanban__card-points {
+      font-family: var(--ff-body);
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.06);
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+    .kanban__card-avatar {
+      width: 1.375rem;
+      height: 1.375rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(232,52,46,0.3), rgba(232,52,46,0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: var(--clr-white);
+    }
+    .kanban__card-checklist {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .kanban__card-checklist-bar {
+      flex: 1;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .kanban__card-checklist-fill {
+      height: 100%;
+      background: rgba(72,199,142,0.5);
+      border-radius: 2px;
+      transition: width 1.5s ease;
+    }
+    .kanban__card-checklist-text {
+      font-size: 0.5625rem;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+
+    /* Floating glow animation */
+    @keyframes kanbanFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .kanban__board-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 10%;
+      right: 10%;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(232,52,46,0.08) 0%, transparent 70%);
+      filter: blur(15px);
+      pointer-events: none;
+      animation: kanbanGlowPulse 3s ease-in-out infinite;
+    }
+    @keyframes kanbanGlowPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
        RESPONSIVE
        ═══════════════════════════════════════════════════════════ */
     @media (max-width: 1199px) {
@@ -2242,6 +2549,8 @@
       .reviews-header { flex-direction: column; align-items: flex-start; }
       .reviews-header-right { text-align: left; }
       .reviews-verified { justify-content: flex-start; }
+      .kanban__columns { grid-template-columns: repeat(2, 1fr); }
+      .kanban__col:last-child { grid-column: span 2; }
       .faq__header { grid-template-columns: 1fr; gap: 1.5rem; }
       .faq__header-note { justify-self: start; }
       .faq__heading { font-size: clamp(1.8rem, 1rem + 3vw, 3rem); }
@@ -2263,6 +2572,10 @@
       .review-card--wide { grid-column: span 1; }
       .review-card { padding: 1.5rem; }
       .reviews-heading { font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
+      .kanban__columns { grid-template-columns: 1fr; }
+      .kanban__col:last-child { grid-column: span 1; }
+      .kanban__heading { font-size: clamp(1.4rem, 0.8rem + 2vw, 2rem); }
+      .kanban__topbar-views { display: none; }
       .geo-canvas { opacity: 0.2; }
       .noise-overlay { opacity: 0.01; }
       .glitch-lines { opacity: 0.15; }
@@ -2403,8 +2716,8 @@
       <div class="container">
         <div class="h-inner">
           <a href="#" class="h-logo">
-            <span class="h-logo__name">Иван</span>
-            <span class="h-logo__sub">Data Analytics Mentor</span>
+            <span class="h-logo__name">Полукаров Иван</span>
+            <span class="h-logo__sub">Ментор по Аналитике Данных</span>
           </a>
           <nav class="h-links">
             <ul>
@@ -2415,7 +2728,7 @@
               <li><a href="#faq">FAQ</a></li>
             </ul>
           </nav>
-          <div class="btn btn-s btn-primary" onclick="window.open('https://t.me/', '_blank')">
+          <div class="btn btn-s btn-primary" onclick="window.open('https://t.me/AnalystDeMent0r', '_blank')">
             <div class="btn-text">Написать</div>
             <div class="btn-icon">
               <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
@@ -2439,20 +2752,20 @@
       <div class="banner-left">
         <h1 class="banner-headline">
           <span class="glitch" data-text="Менторство">Менторство</span>
-          <span class="glitch" data-text="по Data">по Data</span>
-          <span class="glitch" data-text="Analytics">Analytics</span>
+          <span class="glitch" data-text="по аналитике">по аналитике</span>
+          <span class="glitch" data-text="данных">данных</span>
         </h1>
 
         <p class="banner-subtitle">
-          Помогаю зайти в Data Analytics с нуля и вырасти в доходе, если у вас уже есть опыт
+          Помогаю зайти с нуля, вырасти в доходе и получить оффер
         </p>
 
         <p class="banner-intro">
-          Я — Иван, senior-аналитик данных. Обучаю, помогаю выстроить сильную базу, получить все нужные знания и дойти до оффера.
+          Я — Полукаров Иван, senior-аналитик данных. Обучаю, помогаю выстроить сильную базу, получить все нужные знания и дойти до оффера.
         </p>
 
         <div class="banner-cta">
-          <a href="https://t.me/" target="_blank" rel="noopener" class="btn btn-m btn-accent">
+          <a href="https://t.me/AnalystDeMent0r" target="_blank" rel="noopener" class="btn btn-m btn-accent">
             <div class="btn-text">Написать в Telegram</div>
             <div class="btn-icon">
               <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
@@ -2492,7 +2805,7 @@
           </div>
 
           <div class="banner-photo">
-            <img src="ivan.jpg" alt="Иван — Data Analytics Mentor" />
+            <img src="./ivan.jpg" alt="Полукаров Иван — Ментор по Аналитике Данных" />
             <div class="photo-glitch-line"></div>
 
             <!-- Badges on top of photo -->
@@ -2567,7 +2880,7 @@
         </p>
 
         <div class="about-cta">
-          <a href="https://t.me/" target="_blank" rel="noopener" class="btn btn-m btn-accent">
+          <a href="https://t.me/AnalystDeMent0r" target="_blank" rel="noopener" class="btn btn-m btn-accent">
             <div class="btn-text">Обсудить менторство</div>
             <div class="btn-icon">
               <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
@@ -2589,7 +2902,7 @@
 
       <div class="why-da__left-top reveal">
         <div class="why-da__label">Направление</div>
-        <p class="why-da__desc-sm">Data Analytics — это профессия, в которой вы работаете с данными, находите закономерности, помогаете бизнесу принимать решения и понимать, что реально происходит в продукте, маркетинге или продажах.</p>
+        <p class="why-da__desc-sm">Аналитика Данных — это профессия, в которой вы работаете с данными, находите закономерности, помогаете бизнесу принимать решения и понимать, что реально происходит в продукте, маркетинге или продажах.</p>
       </div>
 
       <!-- Decorative arrow -->
@@ -2600,8 +2913,8 @@
 
       <div class="why-da__left-bottom reveal delay-2">
         <h2 class="why-da__heading">
-          Data<br/>
-          Analytics<br/>
+          Аналитика<br/>
+          Данных<br/>
           <span class="dash"></span> <span class="accent">одно из<br/>лучших</span><br/>
           направлений<br/>
           для входа в IT
@@ -2775,7 +3088,7 @@
         <div class="programs__card reveal">
           <div class="programs__card-name">С нуля до оффера</div>
           <p class="programs__card-for">
-            Для тех, кто хочет войти в Data Analytics с нуля, получить все нужные знания и дойти до реального оффера с поддержкой на каждом этапе.
+            Для тех, кто хочет войти в Аналитику Данных с нуля, получить все нужные знания и дойти до реального оффера с поддержкой на каждом этапе.
           </p>
           <div class="programs__features">
             <div class="programs__feature">
@@ -2799,9 +3112,9 @@
           </div>
           <div class="programs__price">
             <span class="programs__price-amount">35 000 ₽</span>
-            <span class="programs__price-plus">+ 150%</span>
+            <span class="programs__price-plus">+ 150% <span style="font-size:0.5em;opacity:0.7">(от оффера)</span></span>
           </div>
-          <div class="programs__price-note">от первой зарплаты после трудоустройства</div>
+          <div class="programs__price-note">Оффер также можно разделить</div>
         </div>
 
         <!-- Card 2: Увеличение зарплаты -->
@@ -2832,16 +3145,16 @@
           </div>
           <div class="programs__price">
             <span class="programs__price-amount">35 000 ₽</span>
-            <span class="programs__price-plus">+ 100%</span>
+            <span class="programs__price-plus">+ 100% <span style="font-size:0.5em;opacity:0.7">(от оффера)</span></span>
           </div>
-          <div class="programs__price-note">от прибавки к зарплате</div>
+          <div class="programs__price-note">Оффер также можно разделить</div>
         </div>
 
       </div>
 
       <!-- CTA -->
       <div class="programs__cta reveal">
-        <a href="https://t.me/" class="programs__cta-btn">
+        <a href="https://t.me/AnalystDeMent0r" class="programs__cta-btn">
           Обсудить, какая программа мне подходит
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"/>
@@ -2967,6 +3280,136 @@
     </div>
   </section>
 
+  <!-- ═══ SECTION: KANBAN ═══ -->
+  <section class="kanban" id="kanban">
+    <div class="container">
+
+      <div class="kanban__header reveal">
+        <div class="kanban__label">ИНТЕРАКТИВНАЯ ПРОГРАММА</div>
+        <h2 class="kanban__heading">Обучение построено через Kanban-доски,<br>как в настоящих командах</h2>
+        <p class="kanban__desc">Вы проходите программу через Kanban-доски: с задачами, статусами и понятным движением по этапам. Это помогает не просто учиться, а сразу привыкать к рабочей логике аналитика.</p>
+      </div>
+
+      <div class="kanban__board-wrap reveal">
+        <div class="kanban__board">
+
+          <div class="kanban__topbar">
+            <div class="kanban__topbar-title">Доска Задач</div>
+            <div class="kanban__topbar-views">
+              <span class="kanban__view-btn kanban__view-btn--active">Доска</span>
+              <span class="kanban__view-btn">Списки</span>
+              <span class="kanban__view-btn">Отчёты</span>
+            </div>
+          </div>
+
+          <div class="kanban__columns">
+
+            <!-- Column: Backlog -->
+            <div class="kanban__col">
+              <div class="kanban__col-header">
+                <span class="kanban__col-title">Бэклог</span>
+                <span class="kanban__col-count">3</span>
+              </div>
+              <div class="kanban__card" data-delay="200">
+                <div class="kanban__card-title">[THEORY] Основы статистики</div>
+                <div><span class="kanban__card-tag kanban__card-tag--green">Третий модуль</span></div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">5 SP</span>
+                  <span class="kanban__card-avatar">АК</span>
+                </div>
+              </div>
+              <div class="kanban__card" data-delay="400">
+                <div class="kanban__card-title">[HOMEWORK] SQL Interview Tasks</div>
+                <div><span class="kanban__card-tag kanban__card-tag--yellow">Первый модуль</span></div>
+                <div class="kanban__card-checklist">
+                  <div class="kanban__card-checklist-bar"><div class="kanban__card-checklist-fill" style="width: 25%"></div></div>
+                  <span class="kanban__card-checklist-text">1/4</span>
+                </div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">13 SP</span>
+                  <span class="kanban__card-avatar">У</span>
+                </div>
+              </div>
+              <div class="kanban__card" data-delay="600">
+                <div class="kanban__card-title">[HOMEWORK] Решить задачи с leetcode</div>
+                <div><span class="kanban__card-tag kanban__card-tag--blue">Второй модуль</span></div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">13 SP</span>
+                  <span class="kanban__card-avatar">У</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column: In Progress -->
+            <div class="kanban__col">
+              <div class="kanban__col-header">
+                <span class="kanban__col-title">В работе</span>
+                <span class="kanban__col-count">2</span>
+              </div>
+              <div class="kanban__card" data-delay="300">
+                <div class="kanban__card-title">[EXTRA] Курс на продуктовое мышление</div>
+                <div><span class="kanban__card-tag kanban__card-tag--pink">Введение</span></div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">13 SP</span>
+                  <div style="display:flex;gap:0.25rem">
+                    <span class="kanban__card-avatar">АК</span>
+                    <span class="kanban__card-avatar" style="background:linear-gradient(135deg, rgba(72,199,142,0.4), rgba(72,199,142,0.7))">У</span>
+                  </div>
+                </div>
+              </div>
+              <div class="kanban__card" data-delay="500">
+                <div class="kanban__card-title">[HOMEWORK] Основы теории вероятностей</div>
+                <div><span class="kanban__card-tag kanban__card-tag--green">Третий модуль</span></div>
+                <div class="kanban__card-checklist">
+                  <div class="kanban__card-checklist-bar"><div class="kanban__card-checklist-fill" style="width: 60%"></div></div>
+                  <span class="kanban__card-checklist-text">3/5</span>
+                </div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">5 SP</span>
+                  <span class="kanban__card-avatar">АК</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column: Done -->
+            <div class="kanban__col">
+              <div class="kanban__col-header">
+                <span class="kanban__col-title">Готово</span>
+                <span class="kanban__col-count">2</span>
+              </div>
+              <div class="kanban__card" data-delay="350">
+                <div class="kanban__card-title">[THEORY] Введение в SQL</div>
+                <div><span class="kanban__card-tag kanban__card-tag--yellow">Первый модуль</span></div>
+                <div class="kanban__card-checklist">
+                  <div class="kanban__card-checklist-bar"><div class="kanban__card-checklist-fill" style="width: 100%"></div></div>
+                  <span class="kanban__card-checklist-text">4/4</span>
+                </div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">8 SP</span>
+                  <span class="kanban__card-avatar">У</span>
+                </div>
+              </div>
+              <div class="kanban__card" data-delay="550">
+                <div class="kanban__card-title">[HOMEWORK] Решить задачи с реальных собеседований</div>
+                <div><span class="kanban__card-tag kanban__card-tag--blue">Второй модуль</span></div>
+                <div class="kanban__card-checklist">
+                  <div class="kanban__card-checklist-bar"><div class="kanban__card-checklist-fill" style="width: 100%"></div></div>
+                  <span class="kanban__card-checklist-text">3/3</span>
+                </div>
+                <div class="kanban__card-meta">
+                  <span class="kanban__card-points">13 SP</span>
+                  <span class="kanban__card-avatar">У</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ═══ SECTION: FAQ ═══ -->
   <section class="faq" id="faq">
     <div class="container">
@@ -3062,7 +3505,7 @@
             </div>
           </div>
           <div class="faq__answer">
-            <div class="faq__answer-inner">Нет. Data Analytics&nbsp;&mdash; это не классическая разработка. Здесь код является инструментом, а не основой всей профессии.</div>
+            <div class="faq__answer-inner">Нет. Аналитика Данных&nbsp;&mdash; это не классическая разработка. Здесь код является инструментом, а не основой всей профессии.</div>
           </div>
         </div>
 
@@ -3097,13 +3540,13 @@
 
       <h2 class="cta-final__heading reveal">
         <span>ГОТОВЫ</span>
-        <span>ВОЙТИ В <span class="hl-red">DATA</span></span>
-        <span><span class="hl-outline">ANALYTICS</span><span style="color: var(--clr-accent)">?</span></span>
+        <span>ВОЙТИ В <span class="hl-red">АНАЛИТИКУ</span></span>
+        <span><span class="hl-outline">ДАННЫХ</span><span style="color: var(--clr-accent)">?</span></span>
       </h2>
 
       <p class="cta-final__sub reveal">Напишите в Telegram — разберём ваш уровень, цель и подберём оптимальный формат менторства</p>
 
-      <a href="https://t.me/" class="cta-final__btn reveal">
+      <a href="https://t.me/AnalystDeMent0r" class="cta-final__btn reveal">
         <span>Написать в Telegram</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
@@ -3122,12 +3565,12 @@
       <div class="footer-inner">
 
         <div class="footer-brand">
-          <div class="footer-brand__name">Иван</div>
-          <div class="footer-brand__role">Data Analytics Mentor</div>
+          <div class="footer-brand__name">Полукаров Иван</div>
+          <div class="footer-brand__role">Ментор по Аналитике Данных</div>
         </div>
 
         <div class="footer-center">
-          <a href="https://t.me/" class="footer-btn">
+          <a href="https://t.me/AnalystDeMent0r" class="footer-btn">
             <span>Написать в Telegram</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"/>
@@ -3541,6 +3984,33 @@
         });
       });
     })();
+
+    // Kanban card reveal animation
+    const kanbanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.kanban__card');
+          cards.forEach((card, i) => {
+            const delay = parseInt(card.dataset.delay) || (i * 150);
+            setTimeout(() => {
+              card.classList.add('card-visible');
+            }, delay);
+          });
+          // Animate checklist fills
+          setTimeout(() => {
+            entry.target.querySelectorAll('.kanban__card-checklist-fill').forEach(fill => {
+              const targetWidth = fill.style.width;
+              fill.style.width = '0%';
+              setTimeout(() => { fill.style.width = targetWidth; }, 100);
+            });
+          }, 800);
+          kanbanObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const kanbanBoard = document.querySelector('.kanban__board');
+    if (kanbanBoard) kanbanObserver.observe(kanbanBoard);
 
     // FAQ Accordion
     document.querySelectorAll('.faq__question').forEach(btn => {
