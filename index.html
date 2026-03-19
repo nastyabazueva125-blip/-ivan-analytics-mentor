@@ -310,19 +310,26 @@
 
     .programs__buy-btn {
       margin-top: 1.5rem;
-      background: transparent;
-      border: none;
-      width: 100%;
       position: relative;
       z-index: 10;
-    }
-    .programs__buy-btn .btn-text {
+      width: 100%;
       background-color: var(--clr-accent);
       color: var(--clr-white);
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--ff-body);
+      cursor: pointer;
+      transition: all var(--transition-1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .programs__buy-btn .btn-icon {
-      background-color: var(--clr-accent);
-      color: var(--clr-white);
+    .programs__buy-btn:hover {
+      background-color: var(--clr-accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 0.5rem 1rem rgba(232, 52, 46, 0.3);
     }
 
     @media (min-width: 1200px) {
@@ -3378,10 +3385,7 @@
           </div>
           <div class="programs__price-note">Оффер также можно разделить</div>
           <button class="btn btn-m btn-accent programs__buy-btn" data-price="35000" data-product="С нуля до оффера">
-            <span class="btn-text">Купить обучение</span>
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
+            Купить обучение
           </button>
         </div>
 
@@ -3417,10 +3421,7 @@
           </div>
           <div class="programs__price-note">Оффер также можно разделить</div>
           <button class="btn btn-m btn-accent programs__buy-btn" data-price="35000" data-product="Увеличение зарплаты">
-            <span class="btn-text">Купить обучение</span>
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
+            Купить обучение
           </button>
         </div>
 
