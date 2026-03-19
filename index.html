@@ -4298,52 +4298,6 @@
     const kanbanBoard = document.querySelector('.kanban__board');
     if (kanbanBoard) kanbanObserver.observe(kanbanBoard);
 
-    // Payment Modal Handler
-    const paymentModal = document.getElementById('payment-modal');
-    const closePaymentBtn = document.getElementById('close-payment');
-    const acceptOfferCheckbox = document.getElementById('accept-offer');
-    const payBtn = document.getElementById('pay-btn');
-    let currentPrice = 35000;
-    let currentProduct = '';
-
-    // Open payment modal when clicking buy button
-    document.querySelectorAll('.programs__buy-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentPrice = parseInt(btn.dataset.price);
-        currentProduct = btn.dataset.product;
-        paymentModal.classList.add('active');
-        acceptOfferCheckbox.checked = false;
-        payBtn.disabled = true;
-      });
-    });
-
-    // Close payment modal
-    closePaymentBtn.addEventListener('click', () => {
-      paymentModal.classList.remove('active');
-    });
-
-    // Close modal when clicking outside
-    paymentModal.addEventListener('click', (e) => {
-      if (e.target === paymentModal) {
-        paymentModal.classList.remove('active');
-      }
-    });
-
-    // Enable/disable pay button based on checkbox
-    acceptOfferCheckbox.addEventListener('change', () => {
-      payBtn.disabled = !acceptOfferCheckbox.checked;
-    });
-
-    // Handle payment button click
-    payBtn.addEventListener('click', () => {
-      if (!acceptOfferCheckbox.checked) return;
-      payformInit('DataAnalyst.payform.ru', {
-        order_sum: currentPrice,
-        currency: 'rub',
-        order_name: currentProduct
-      });
-    });
-
     // FAQ Accordion
     document.querySelectorAll('.faq__question').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -4401,6 +4355,51 @@
       </div>
     </div>
   </div>
+
+  <!-- Payment Modal Handler -->
+  <script>
+    (function() {
+      const paymentModal = document.getElementById('payment-modal');
+      const closePaymentBtn = document.getElementById('close-payment');
+      const acceptOfferCheckbox = document.getElementById('accept-offer');
+      const payBtn = document.getElementById('pay-btn');
+      let currentPrice = 35000;
+      let currentProduct = '';
+
+      document.querySelectorAll('.programs__buy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          currentPrice = parseInt(btn.dataset.price);
+          currentProduct = btn.dataset.product;
+          paymentModal.classList.add('active');
+          acceptOfferCheckbox.checked = false;
+          payBtn.disabled = true;
+        });
+      });
+
+      closePaymentBtn.addEventListener('click', function() {
+        paymentModal.classList.remove('active');
+      });
+
+      paymentModal.addEventListener('click', function(e) {
+        if (e.target === paymentModal) {
+          paymentModal.classList.remove('active');
+        }
+      });
+
+      acceptOfferCheckbox.addEventListener('change', function() {
+        payBtn.disabled = !acceptOfferCheckbox.checked;
+      });
+
+      payBtn.addEventListener('click', function() {
+        if (!acceptOfferCheckbox.checked) return;
+        payformInit('DataAnalyst.payform.ru', {
+          order_sum: currentPrice,
+          currency: 'rub',
+          order_name: currentProduct
+        });
+      });
+    })();
+  </script>
 
   <!-- Prodamus Payment Widget -->
   <script defer src="https://widget.prodamus.ru/src/init.js"></script>
