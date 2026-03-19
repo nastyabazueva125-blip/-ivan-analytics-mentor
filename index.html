@@ -274,6 +274,32 @@
       color: var(--clr-accent-light);
     }
 
+    .payment-form__btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      margin-top: 1.5rem;
+      background-color: var(--clr-accent);
+      color: var(--clr-white);
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--ff-body);
+      cursor: pointer;
+      transition: all var(--transition-1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .payment-form__btn:hover:not(:disabled) {
+      background-color: var(--clr-accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 0.5rem 1rem rgba(232, 52, 46, 0.3);
+    }
+    .payment-form__btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     #pay-btn {
       margin-top: 1rem;
     }
@@ -4345,11 +4371,8 @@
               Я принимаю условия <a href="/oferta.pdf" target="_blank">публичной оферты</a> и <a href="/politika-konfidencialnosti.pdf" target="_blank">политики конфиденциальности</a>
             </span>
           </label>
-          <button id="pay-btn" class="btn btn-m btn-accent" disabled>
-            <span class="btn-text">Оплатить</span>
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
+          <button id="pay-btn" class="payment-form__btn" disabled>
+            Оплатить
           </button>
         </div>
       </div>
