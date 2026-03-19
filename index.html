@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://widget.prodamus.ru/src/init.css">
   <style>
     /* ═══════════════════════════════════════════════════════════
        RESET & TOKENS — redstone.software design system
@@ -149,6 +150,141 @@
     @keyframes moveRightReverse { 0% { padding-inline: var(--btn-h) 0; } 100% { padding-inline: 0 var(--btn-h); } }
     @keyframes moveLeft { 0% { right: 0; } 100% { right: calc(100% - var(--btn-h)); } }
     @keyframes moveLeftReverse { 0% { right: calc(100% - var(--btn-h)); } 100% { right: 0; } }
+
+    /* PAYMENT MODAL - PRODAMUS INTEGRATION */
+    .payment-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 2, 2, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .payment-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .payment-modal__content {
+      position: relative;
+      background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(20,20,20,0.95) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow:
+        0 0 2rem rgba(232,52,46,0.15),
+        0 0.125rem 0.5rem 0.125rem rgba(0,0,0,0.3);
+      animation: modalSlideIn 0.3s ease;
+    }
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-2rem);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .payment-modal__close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--clr-text);
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+    }
+    .payment-modal__close:hover {
+      color: var(--clr-white);
+    }
+    .payment-modal__close svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke-width: 2;
+    }
+
+    .payment-modal__title {
+      font-family: var(--ff-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--clr-white);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .payment-modal__body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .payment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .payment-form__checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .payment-form__checkbox input[type="checkbox"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      min-width: 1.25rem;
+      min-height: 1.25rem;
+      margin-top: 0.25rem;
+      cursor: pointer;
+      accent-color: var(--clr-accent);
+    }
+
+    .payment-form__checkbox-text {
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--clr-text);
+      flex: 1;
+    }
+    .payment-form__checkbox-text a {
+      color: var(--clr-accent);
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .payment-form__checkbox-text a:hover {
+      color: var(--clr-accent-light);
+    }
+
+    #pay-btn {
+      margin-top: 1rem;
+    }
+    #pay-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .programs__buy-btn {
+      margin-top: auto;
+    }
 
     @media (min-width: 1200px) {
       .btn:not(:hover) { animation: moveRightReverse var(--cubic-1) forwards; }
@@ -3202,6 +3338,12 @@
             <span class="programs__price-plus">+ 150% <span style="font-size:0.5em;opacity:0.7">(от оффера)</span></span>
           </div>
           <div class="programs__price-note">Оффер также можно разделить</div>
+          <button class="btn btn-m btn-accent programs__buy-btn" data-price="35000" data-product="С нуля до оффера">
+            <span class="btn-text">Купить обучение</span>
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </button>
         </div>
 
         <!-- Card 2: Увеличение зарплаты -->
@@ -3235,6 +3377,12 @@
             <span class="programs__price-plus">+ 100% <span style="font-size:0.5em;opacity:0.7">(от оффера)</span></span>
           </div>
           <div class="programs__price-note">Оффер также можно разделить</div>
+          <button class="btn btn-m btn-accent programs__buy-btn" data-price="35000" data-product="Увеличение зарплаты">
+            <span class="btn-text">Купить обучение</span>
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </button>
         </div>
 
       </div>
@@ -4137,6 +4285,52 @@
     const kanbanBoard = document.querySelector('.kanban__board');
     if (kanbanBoard) kanbanObserver.observe(kanbanBoard);
 
+    // Payment Modal Handler
+    const paymentModal = document.getElementById('payment-modal');
+    const closePaymentBtn = document.getElementById('close-payment');
+    const acceptOfferCheckbox = document.getElementById('accept-offer');
+    const payBtn = document.getElementById('pay-btn');
+    let currentPrice = 35000;
+    let currentProduct = '';
+
+    // Open payment modal when clicking buy button
+    document.querySelectorAll('.programs__buy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentPrice = parseInt(btn.dataset.price);
+        currentProduct = btn.dataset.product;
+        paymentModal.classList.add('active');
+        acceptOfferCheckbox.checked = false;
+        payBtn.disabled = true;
+      });
+    });
+
+    // Close payment modal
+    closePaymentBtn.addEventListener('click', () => {
+      paymentModal.classList.remove('active');
+    });
+
+    // Close modal when clicking outside
+    paymentModal.addEventListener('click', (e) => {
+      if (e.target === paymentModal) {
+        paymentModal.classList.remove('active');
+      }
+    });
+
+    // Enable/disable pay button based on checkbox
+    acceptOfferCheckbox.addEventListener('change', () => {
+      payBtn.disabled = !acceptOfferCheckbox.checked;
+    });
+
+    // Handle payment button click
+    payBtn.addEventListener('click', () => {
+      if (!acceptOfferCheckbox.checked) return;
+      payformInit('DataAnalyst.payform.ru', {
+        order_sum: currentPrice,
+        currency: 'rub',
+        order_name: currentProduct
+      });
+    });
+
     // FAQ Accordion
     document.querySelectorAll('.faq__question').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -4165,6 +4359,38 @@
 
 
   </script>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="payment-modal">
+    <div class="payment-modal__content">
+      <button id="close-payment" class="payment-modal__close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <h2 class="payment-modal__title">Оформление покупки</h2>
+      <div class="payment-modal__body">
+        <div class="payment-form">
+          <label class="payment-form__checkbox">
+            <input type="checkbox" id="accept-offer" />
+            <span class="payment-form__checkbox-text">
+              Я принимаю условия <a href="/oferta.pdf" target="_blank">публичной оферты</a> и <a href="/politika-konfidencialnosti.pdf" target="_blank">политики конфиденциальности</a>
+            </span>
+          </label>
+          <button id="pay-btn" class="btn btn-m btn-accent" disabled>
+            <span class="btn-text">Оплатить</span>
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prodamus Payment Widget -->
+  <script defer src="https://widget.prodamus.ru/src/init.js"></script>
 
 </body>
 </html>
